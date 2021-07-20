@@ -8,6 +8,9 @@ import {
   ExcalidrawProps,
   SceneData,
 } from '@excalidraw/excalidraw/types/types';
+import axios from 'axios';
+import { setIntervalAsync } from 'set-interval-async/dynamic';
+import { clearIntervalAsync } from 'set-interval-async';
 
 import InitialData from '../data';
 
@@ -46,6 +49,44 @@ const App: FC = (): ReactElement => {
   useEffect(() => {
     import('@excalidraw/excalidraw').then((comp) => setComp(comp.default));
   }, []);
+
+  const extractImageFromScene = async () => {
+    return await excalidrawExportFns.exportToSvg({
+      elements: excalidrawRef.current!.getSceneElements(),
+      appState: {
+        ...InitialData.appState,
+        exportWithDarkMode,
+        //@ts-ignore
+        shouldAddWatermark,
+      },
+    });
+  };
+
+  const saveImageToBackend = async () => {
+    try {
+      const result = await extractImageFromScene();
+      const saveImgResult = await axios.post('/api/image', {
+        name: new Date().getTime().toString(),
+        svgString: JSON.stringify(result.outerHTML),
+      });
+      console.log(saveImgResult);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    let saveImageFrequently: any;
+    if (excalidrawExportFns) {
+      console.log('Hello');
+      saveImageFrequently = setIntervalAsync(saveImageToBackend, 10000);
+    }
+    return () => {
+      clearIntervalAsync(saveImageFrequently)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    };
+  }, [excalidrawExportFns]);
 
   useEffect(() => {
     const onHashChange = () => {
