@@ -1,9 +1,23 @@
 ## About
-This repo contains the backend of the excalidraw-demo.
+This repo contains the complete code of the excalidraw-demo.
 
 ## How to use
-1. Clone the repo and run `yarn`.
-2. Run `yarn start` to start the development server.
-3. Visit [here](https://60f605c7aab46300072e63f9--trusting-lovelace-b49325.netlify.app/) or [here](https://github.com/K-Kumar-01/excalidraw-demo).
+1. Clone the repo.
+2. Run `yarn setup` to setup the development server.
+3. Create `next.conifg.js` if not already create and export `MONGO_URI` env variable. Example:
 
-At interval of 10 seconds, a `svg` image will get saved on your local machine in `public` directory.
+    ```js
+      module.exports={
+        env: {
+          MONGO_URI:<MongoAtlasServerConnectionURL>
+        },
+      }
+    ```
+4. Visit `localhost:3000` and see the server running.
+
+Your database will be populated with the different images. Each image will have this basic structure.
+```js
+  name: new Date().getTime().toString(),
+  svgString: JSON.stringify(result.outerHTML),
+  link: router.pathname,
+```
