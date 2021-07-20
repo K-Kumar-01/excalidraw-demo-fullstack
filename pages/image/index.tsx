@@ -1,10 +1,10 @@
 import axios from 'axios';
 import Head from 'next/head';
-import { FC, Fragment, ReactElement, useEffect, useState } from 'react';
-import ImageDetailCard from '../../components/ImageDetailCard';
-import Loader from '../../components/Loader';
-import BasicLayout from '../../layouts';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { ImageDetail } from '../../types';
+import BasicLayout from '../../layouts';
+import Loader from '../../components/Loader';
+import ImageDetailCard from '../../components/ImageDetailCard';
 
 const Image: FC = (): ReactElement => {
   const [images, setImages] = useState<ImageDetail[]>([]);

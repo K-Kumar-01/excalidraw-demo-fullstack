@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState, useRef, FC, ReactElement, Fragment } from 'react';
 import { useRouter } from 'next/router';
-
+import Head from 'next/head';
 import type ExcalidrawImperativeAPI from '@excalidraw/excalidraw/types/components/App';
 import type { ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types';
 import {
@@ -9,13 +8,13 @@ import {
   ExcalidrawProps,
   SceneData,
 } from '@excalidraw/excalidraw/types/types';
-import axios from 'axios';
 import { setIntervalAsync } from 'set-interval-async/dynamic';
 import { clearIntervalAsync } from 'set-interval-async';
-
-import InitialData from '../data';
+import axios from 'axios';
 import Loader from '../components/Loader';
 import BasicLayout from '../layouts';
+
+import InitialData from '../data';
 
 const renderTopRightUI = () => {
   return (
@@ -156,6 +155,13 @@ const App: FC = (): ReactElement => {
 
   return (
     <Fragment>
+      <Head>
+        <title>Excalidraw Demo</title>
+        <meta name="description" content={`Demo exaclidraw `} />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta property="og:title" content="Image excalidraw" key="title" />
+      </Head>
+
       {!Comp ? (
         <Loader />
       ) : (
