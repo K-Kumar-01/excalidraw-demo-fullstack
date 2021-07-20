@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState, useRef, FC, ReactElement, Fragment } from 'react';
+import { useRouter } from 'next/router';
 
 import type ExcalidrawImperativeAPI from '@excalidraw/excalidraw/types/components/App';
 import type { ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types';
@@ -33,6 +34,8 @@ const renderFooter = () => {
 };
 
 const App: FC = (): ReactElement => {
+  const router = useRouter();
+
   const excalidrawRef = useRef<ExcalidrawImperativeAPI>(null);
 
   const [viewModeEnabled, setViewModeEnabled] = useState(false);
@@ -68,6 +71,7 @@ const App: FC = (): ReactElement => {
       const saveImgResult = await axios.post('/api/image', {
         name: new Date().getTime().toString(),
         svgString: JSON.stringify(result.outerHTML),
+        link: router.pathname,
       });
       console.log(saveImgResult);
     } catch (error) {
