@@ -17,8 +17,22 @@ const image = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(500).end();
     }
   } else if (req.method === 'GET') {
+    const { name, link } = req.query;
+
+    interface findOptionsType {
+      name?: string;
+      link?: string;
+    }
+    const findOptions: findOptionsType = {};
+
+    if (name) {
+      findOptions.name = name as string;
+    }
+    if (link) {
+      findOptions.link = link as string;
+    }
     try {
-      const images = await ImageModel.find({}).exec();
+      const images = await ImageModel.find(findOptions).exec();
       res.status(200).json({ images });
     } catch (error) {
       res.status(500).end();
