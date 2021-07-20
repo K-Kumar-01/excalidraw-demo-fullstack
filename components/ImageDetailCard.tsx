@@ -10,8 +10,8 @@ const ImageDetailCard: FC<ImageDetail> = ({ name, link }): ReactElement => {
     <div className={styles.card}>
       <div>
         <span className={styles.desc}>Link from which file was created: </span>
-        <Link href={`/link/${link}`}>
-          <a href={`/link/${link}`} className={styles.link}>
+        <Link href={`/image/link/${link}`}>
+          <a href={`/image/link/${link}`} className={styles.link}>
             {link}
           </a>
         </Link>
