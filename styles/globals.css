@@ -33,3 +33,9 @@
 .export-wrapper__checkbox {
   display: flex;
 }
+.images-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}

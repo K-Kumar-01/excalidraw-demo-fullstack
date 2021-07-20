@@ -1,0 +1,29 @@
+.card {
+  width: 400px;
+  margin: auto;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 0.25rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.desc {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.image {
+  flex-grow: 1;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
