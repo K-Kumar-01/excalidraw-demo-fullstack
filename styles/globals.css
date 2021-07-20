@@ -39,3 +39,13 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.link {
+  text-decoration: none;
+  color: black;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin: auto 1rem;
+  font-size: 1.2rem;
+}
+.link:hover {
+  text-decoration: underline;
+}

@@ -14,6 +14,8 @@ import { setIntervalAsync } from 'set-interval-async/dynamic';
 import { clearIntervalAsync } from 'set-interval-async';
 
 import InitialData from '../data';
+import Loader from '../components/Loader';
+import BasicLayout from '../layouts';
 
 const renderTopRightUI = () => {
   return (
@@ -155,167 +157,169 @@ const App: FC = (): ReactElement => {
   return (
     <Fragment>
       {!Comp ? (
-        <div>Hello</div>
+        <Loader />
       ) : (
-        <div className="App">
-          <h1> Excalidraw Example</h1>
-          <div className="button-wrapper">
-            <button className="update-scene" onClick={updateScene}>
-              Update Scene
-            </button>
-            <button
-              className="reset-scene"
-              onClick={() => {
-                //@ts-ignore
-                excalidrawRef.current!.resetScene();
-              }}
-            >
-              Reset Scene
-            </button>
-            <label>
-              <input
-                type="checkbox"
-                checked={viewModeEnabled}
-                onChange={() => setViewModeEnabled(!viewModeEnabled)}
-              />
-              View mode
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={zenModeEnabled}
-                onChange={() => setZenModeEnabled(!zenModeEnabled)}
-              />
-              Zen mode
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={gridModeEnabled}
-                onChange={() => setGridModeEnabled(!gridModeEnabled)}
-              />
-              Grid mode
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                checked={theme === 'dark'}
-                onChange={() => {
-                  let newTheme: 'light' | 'dark' = 'light';
-                  if (theme === 'light') {
-                    newTheme = 'dark';
-                  }
-                  setTheme(newTheme);
+        <BasicLayout>
+          <div className="App">
+            <h1> Excalidraw Example</h1>
+            <div className="button-wrapper">
+              <button className="update-scene" onClick={updateScene}>
+                Update Scene
+              </button>
+              <button
+                className="reset-scene"
+                onClick={() => {
+                  //@ts-ignore
+                  excalidrawRef.current!.resetScene();
                 }}
-              />
-              Switch to Dark Theme
-            </label>
-          </div>
-          <div className="excalidraw-wrapper">
-            <Comp
-              //@ts-ignore
-              ref={excalidrawRef}
-              //@ts-ignore
-              InitialData={InitialData}
-              onChange={(
-                elements: readonly ExcalidrawElement[],
-                state: AppState
-              ) => console.log('Elements :', elements, 'State : ', state)}
-              onCollabButtonClick={() =>
-                window.alert('You clicked on collab button')
-              }
-              viewModeEnabled={viewModeEnabled}
-              zenModeEnabled={zenModeEnabled}
-              gridModeEnabled={gridModeEnabled}
-              theme={theme}
-              name="Custom name of drawing"
-              renderFooter={renderFooter}
-              renderTopRightUI={renderTopRightUI}
-            />
-          </div>
-          <div className="export-wrapper button-wrapper">
-            <label className="export-wrapper__checkbox">
-              <input
-                type="checkbox"
-                checked={exportWithDarkMode}
-                onChange={() => setExportWithDarkMode(!exportWithDarkMode)}
-              />
-              Export with dark mode
-            </label>
-            <label className="export-wrapper__checkbox">
-              <input
-                type="checkbox"
-                checked={shouldAddWatermark}
-                onChange={() => setShouldAddWatermark(!shouldAddWatermark)}
-              />
-              Add Watermark
-            </label>
-            {excalidrawExportFns && (
-              <Fragment>
-                <button
-                  onClick={async () => {
-                    const svg = await excalidrawExportFns.exportToSvg({
-                      elements: excalidrawRef.current!.getSceneElements(),
-                      appState: {
-                        ...InitialData.appState,
-                        exportWithDarkMode,
-                        //@ts-ignore
-                        shouldAddWatermark,
-                      },
-                    });
-                    // console.log(svg.outerHTML);
-                    document.querySelector('.export-svg')!.innerHTML =
-                      svg.outerHTML;
+              >
+                Reset Scene
+              </button>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={viewModeEnabled}
+                  onChange={() => setViewModeEnabled(!viewModeEnabled)}
+                />
+                View mode
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={zenModeEnabled}
+                  onChange={() => setZenModeEnabled(!zenModeEnabled)}
+                />
+                Zen mode
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={gridModeEnabled}
+                  onChange={() => setGridModeEnabled(!gridModeEnabled)}
+                />
+                Grid mode
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={theme === 'dark'}
+                  onChange={() => {
+                    let newTheme: 'light' | 'dark' = 'light';
+                    if (theme === 'light') {
+                      newTheme = 'dark';
+                    }
+                    setTheme(newTheme);
                   }}
-                >
-                  Export to SVG
-                </button>
-                <div className="export export-svg"></div>
+                />
+                Switch to Dark Theme
+              </label>
+            </div>
+            <div className="excalidraw-wrapper">
+              <Comp
+                //@ts-ignore
+                ref={excalidrawRef}
+                //@ts-ignore
+                InitialData={InitialData}
+                onChange={(
+                  elements: readonly ExcalidrawElement[],
+                  state: AppState
+                ) => console.log('Elements :', elements, 'State : ', state)}
+                onCollabButtonClick={() =>
+                  window.alert('You clicked on collab button')
+                }
+                viewModeEnabled={viewModeEnabled}
+                zenModeEnabled={zenModeEnabled}
+                gridModeEnabled={gridModeEnabled}
+                theme={theme}
+                name="Custom name of drawing"
+                renderFooter={renderFooter}
+                renderTopRightUI={renderTopRightUI}
+              />
+            </div>
+            <div className="export-wrapper button-wrapper">
+              <label className="export-wrapper__checkbox">
+                <input
+                  type="checkbox"
+                  checked={exportWithDarkMode}
+                  onChange={() => setExportWithDarkMode(!exportWithDarkMode)}
+                />
+                Export with dark mode
+              </label>
+              <label className="export-wrapper__checkbox">
+                <input
+                  type="checkbox"
+                  checked={shouldAddWatermark}
+                  onChange={() => setShouldAddWatermark(!shouldAddWatermark)}
+                />
+                Add Watermark
+              </label>
+              {excalidrawExportFns && (
+                <Fragment>
+                  <button
+                    onClick={async () => {
+                      const svg = await excalidrawExportFns.exportToSvg({
+                        elements: excalidrawRef.current!.getSceneElements(),
+                        appState: {
+                          ...InitialData.appState,
+                          exportWithDarkMode,
+                          //@ts-ignore
+                          shouldAddWatermark,
+                        },
+                      });
+                      // console.log(svg.outerHTML);
+                      document.querySelector('.export-svg')!.innerHTML =
+                        svg.outerHTML;
+                    }}
+                  >
+                    Export to SVG
+                  </button>
+                  <div className="export export-svg"></div>
 
-                <button
-                  onClick={async () => {
-                    const blob = await excalidrawExportFns.exportToBlob({
-                      elements: excalidrawRef.current!.getSceneElements(),
-                      mimeType: 'image/png',
-                      appState: {
-                        ...InitialData.appState,
-                        exportWithDarkMode,
-                        //@ts-ignore
-                        shouldAddWatermark,
-                      },
-                    });
-                    setBlobUrl(window.URL.createObjectURL(blob));
-                  }}
-                >
-                  Export to Blob
-                </button>
-                <div className="export export-blob">
-                  <img src={blobUrl!} alt="" />
-                </div>
+                  <button
+                    onClick={async () => {
+                      const blob = await excalidrawExportFns.exportToBlob({
+                        elements: excalidrawRef.current!.getSceneElements(),
+                        mimeType: 'image/png',
+                        appState: {
+                          ...InitialData.appState,
+                          exportWithDarkMode,
+                          //@ts-ignore
+                          shouldAddWatermark,
+                        },
+                      });
+                      setBlobUrl(window.URL.createObjectURL(blob));
+                    }}
+                  >
+                    Export to Blob
+                  </button>
+                  <div className="export export-blob">
+                    <img src={blobUrl!} alt="" />
+                  </div>
 
-                <button
-                  onClick={() => {
-                    const canvas = excalidrawExportFns.exportToCanvas({
-                      elements: excalidrawRef.current!.getSceneElements(),
-                      appState: {
-                        ...InitialData.appState,
-                        exportWithDarkMode,
-                        //@ts-ignore
-                        shouldAddWatermark,
-                      },
-                    });
-                    setCanvasUrl(canvas.toDataURL());
-                  }}
-                >
-                  Export to Canvas
-                </button>
-                <div className="export export-canvas">
-                  <img src={canvasUrl!} alt="" />
-                </div>
-              </Fragment>
-            )}
+                  <button
+                    onClick={() => {
+                      const canvas = excalidrawExportFns.exportToCanvas({
+                        elements: excalidrawRef.current!.getSceneElements(),
+                        appState: {
+                          ...InitialData.appState,
+                          exportWithDarkMode,
+                          //@ts-ignore
+                          shouldAddWatermark,
+                        },
+                      });
+                      setCanvasUrl(canvas.toDataURL());
+                    }}
+                  >
+                    Export to Canvas
+                  </button>
+                  <div className="export export-canvas">
+                    <img src={canvasUrl!} alt="" />
+                  </div>
+                </Fragment>
+              )}
+            </div>
           </div>
-        </div>
+        </BasicLayout>
       )}
     </Fragment>
   );

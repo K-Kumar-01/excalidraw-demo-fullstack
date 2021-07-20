@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { FC, ReactElement, useState, useEffect, Fragment } from 'react';
 import ImageDetailCard from '../../../components/ImageDetailCard';
 import Loader from '../../../components/Loader';
+import BasicLayout from '../../../layouts';
 import { ImageDetail } from '../../../types';
 
 const SingleImage: FC<ImageDetail> = (props): ReactElement => {
@@ -30,7 +31,7 @@ const SingleImage: FC<ImageDetail> = (props): ReactElement => {
   };
 
   return (
-    <Fragment>
+    <BasicLayout>
       <h2 style={{ textAlign: 'center' }}>
         Images generated from link:{router.query.link}
       </h2>
@@ -44,7 +45,7 @@ const SingleImage: FC<ImageDetail> = (props): ReactElement => {
           />
         ))}
       </div>
-    </Fragment>
+    </BasicLayout>
   );
 };
 

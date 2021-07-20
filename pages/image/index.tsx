@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { FC, Fragment, ReactElement, useEffect, useState } from 'react';
 import ImageDetailCard from '../../components/ImageDetailCard';
 import Loader from '../../components/Loader';
+import BasicLayout from '../../layouts';
 import { ImageDetail } from '../../types';
 
 const Image: FC = (): ReactElement => {
@@ -26,7 +27,7 @@ const Image: FC = (): ReactElement => {
   }, []);
 
   return (
-    <Fragment>
+    <BasicLayout>
       <Head>
         <title>Image </title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -39,7 +40,7 @@ const Image: FC = (): ReactElement => {
           <ImageDetailCard key={index + img.name + img.link} {...img} />
         ))}
       </div>
-    </Fragment>
+    </BasicLayout>
   );
 };
 export default Image;
