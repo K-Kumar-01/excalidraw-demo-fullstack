@@ -1,22 +1,7 @@
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
-import Cors from 'cors';
 import { promises } from 'fs';
 
 const { readFile, readdir, writeFile } = promises;
-
-const cors = Cors({ methods: ['GET', 'POST', 'OPTIONS'] });
-
-const runMiddleware = (req: NextApiRequest, res: NextApiResponse, fn: any) => {
-  return new Promise((resolve, reject) => {
-    fn(req, res, (result: NextApiHandler) => {
-      if (result instanceof Error) {
-        return reject(result);
-      }
-
-      return resolve(result);
-    });
-  });
-};
 
 const getallImages = async () => {
   try {
@@ -53,8 +38,6 @@ const getSingleImage = async (imageName: string) => {
 };
 
 const image = async (req: NextApiRequest, res: NextApiResponse) => {
-  await runMiddleware(req, res, cors);
-
   if (req.method === 'POST') {
     let { svgString, name } = req.body;
     svgString = JSON.parse(svgString);
