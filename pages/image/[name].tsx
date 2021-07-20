@@ -37,7 +37,11 @@ const SingleImage: FC<ImageDetail> = (props): ReactElement => {
       {loading && <Loader />}
       <div className={'images-container'}>
         {images.map((img, index) => (
-          <ImageDetailCard key={index + img.name + img.link} {...img} />
+          <ImageDetailCard
+            key={index + img.name + img.link}
+            {...img}
+            showDownloadBtn={true}
+          />
         ))}
       </div>
     </Fragment>

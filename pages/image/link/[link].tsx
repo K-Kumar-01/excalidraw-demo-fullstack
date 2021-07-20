@@ -32,12 +32,16 @@ const SingleImage: FC<ImageDetail> = (props): ReactElement => {
   return (
     <Fragment>
       <h2 style={{ textAlign: 'center' }}>
-        Images with name:{router.query.name}
+        Images generated from link:{router.query.link}
       </h2>
       {loading && <Loader />}
       <div className={'images-container'}>
         {images.map((img, index) => (
-          <ImageDetailCard key={index + img.name + img.link} {...img} />
+          <ImageDetailCard
+            key={index + img.name + img.link}
+            {...img}
+            showDownloadBtn={true}
+          />
         ))}
       </div>
     </Fragment>
