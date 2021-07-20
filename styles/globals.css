@@ -1,16 +1,35 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+.App {
+  font-family: sans-serif;
+  text-align: center;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
+.button-wrapper button {
+  z-index: 1;
+  height: 40px;
+  max-width: 200px;
+  margin: 10px;
+  padding: 5px;
 }
-
-* {
-  box-sizing: border-box;
+.excalidraw .App-menu_top .buttonList {
+  display: flex;
+}
+.excalidraw-wrapper {
+  height: 800px;
+  margin: 50px;
+}
+:root[dir='ltr']
+  .excalidraw
+  .layer-ui__wrapper
+  .zen-mode-transition.App-menu_bottom--transition-left {
+  transform: none;
+}
+.excalidraw .panelColumn {
+  text-align: left;
+}
+.export-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+}
+.export-wrapper__checkbox {
+  display: flex;
 }
