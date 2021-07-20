@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
 import { promises } from 'fs';
+import dbConnect from '../../utils';
 
 const { readFile, readdir, writeFile } = promises;
 
@@ -38,6 +39,8 @@ const getSingleImage = async (imageName: string) => {
 };
 
 const image = async (req: NextApiRequest, res: NextApiResponse) => {
+  await dbConnect();
+
   if (req.method === 'POST') {
     let { svgString, name } = req.body;
     svgString = JSON.parse(svgString);
