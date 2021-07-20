@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState, useRef, FC, ReactElement, Fragment } from 'react';
-import dynamic from 'next/dynamic';
 
 import type ExcalidrawImperativeAPI from '@excalidraw/excalidraw/types/components/App';
 import type { ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types';
@@ -11,12 +10,6 @@ import {
 } from '@excalidraw/excalidraw/types/types';
 
 import InitialData from '../data';
-
-const DynamicExcaliDrawImport = dynamic(
-  //@ts-ignore
-  () => import('@excalidraw/excalidraw'),
-  { ssr: false }
-);
 
 const renderTopRightUI = () => {
   return (
